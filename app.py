@@ -6,10 +6,16 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
 nltk.download('punkt')
-try:
-    nltk.data.find('tokenizers/punkt_tab')
-except LookupError:
-    nltk.download('punkt_tab')
+required_resources = [
+    'tokenizers/punkt_tab',
+    'corpora/stopwords'
+]
+
+for resource in required_resources:
+    try:
+        nltk.data.find(resource)
+    except LookupError:
+        nltk.download(resource.split('/')[-1])
 ps = PorterStemmer()
 
 
